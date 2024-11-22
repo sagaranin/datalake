@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.4'
 
 services:
 
@@ -8,6 +8,9 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: iceberg
+      PGDATA: /catalog/pgdata
+    volumes:
+      - ./catalog:/catalog
     ports:
       - "5432:5432"
     networks:
@@ -79,11 +82,11 @@ services:
       /usr/bin/mc mb minio/warehouse;
       /usr/bin/mc policy set public minio/warehouse;
       tail -f /dev/null"
-  
+
   sparkiceberg:
     image: tabulario/spark-iceberg:3.5.1_1.5.0
     container_name: spark-iceberg
-    build: spark/
+#    build: spark/
     networks:
       iceberg_net:
     depends_on:
@@ -100,7 +103,7 @@ services:
       - "8888:8888"
       - "8080:8080"
       - "10000:10000"
-      - "10001:10001"
+      - "10001:10001"  
 
 networks:
   iceberg_net:
