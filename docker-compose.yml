@@ -6,6 +6,7 @@ services:
 # ===================================================================================================================
   postgres:
     image: postgres:13
+    container_name: postgres-catalog
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -144,6 +145,7 @@ services:
 
   minio:
     image: minio/minio:RELEASE.2024-07-04T14-25-45Z
+    container_name: minio-s3
     restart: always
     command: server /data --console-address ":9001"
     volumes:
