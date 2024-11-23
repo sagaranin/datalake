@@ -165,6 +165,7 @@ services:
       iceberg_net:
         aliases:
           - warehouse.minio
+          - restbackend.minio
 
   mc:
     depends_on:
