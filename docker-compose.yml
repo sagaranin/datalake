@@ -103,7 +103,7 @@ services:
       - AWS_ACCESS_KEY_ID=minioadmin
       - AWS_SECRET_ACCESS_KEY=minioadmin
       - AWS_REGION=us-east-1
-      - CATALOG_WAREHOUSE=s3://warehouse/
+      - CATALOG_WAREHOUSE=s3://restbackend/
       - CATALOG_IO__IMPL=org.apache.iceberg.aws.s3.S3FileIO
       - CATALOG_S3_ENDPOINT=http://minio:9000
       - CATALOG_URI=jdbc:postgresql://postgres:5432/iceberg?user=postgres&amp;password=postgres
@@ -181,7 +181,9 @@ services:
       /bin/sh -c "
       until (/usr/bin/mc config host add minio http://minio:9000 minioadmin minioadmin) do echo '...waiting...' && sleep 1; done;
       /usr/bin/mc mb minio/warehouse;
+      /usr/bin/mc mb minio/restbackend;
       /usr/bin/mc policy set public minio/warehouse;
+      /usr/bin/mc policy set public minio/restbackend;
       tail -f /dev/null"
 
 networks:
